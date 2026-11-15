@@ -1,0 +1,12 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Autorización</title><link rel="stylesheet" href="style.css"></head><body><main>
+<h1>Autorización recibida</h1>
+<div class="card"><p id="msg">Copia este enlace y pégalo en la terminal:</p><code id="url"></code>
+<button id="copy">Copiar enlace</button></div>
+<p class="muted">Esta página no guarda nada; el código solo existe en tu navegador.</p>
+<script>
+const u=location.href,el=document.getElementById('url'),b=document.getElementById('copy');
+el.textContent=u;
+if(!new URLSearchParams(location.search).get('code')){document.getElementById('msg').textContent='No llegó ningún código. Vuelve a intentarlo desde la terminal.';b.hidden=true}
+b.onclick=async()=>{try{await navigator.clipboard.writeText(u);b.textContent='¡Copiado!'}catch(e){const r=document.createRange();r.selectNodeContents(el);getSelection().removeAllRanges();getSelection().addRange(r);b.textContent='Selecciona y copia con ⌘C'}};
+</script></main></body></html>
